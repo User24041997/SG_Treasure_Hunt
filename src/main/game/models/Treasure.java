@@ -24,6 +24,6 @@ public class Treasure extends Point {
 
     @Override
     public String toString() {
-        return "T";
+        return "     T(" + count + ")  ";
     }
 }

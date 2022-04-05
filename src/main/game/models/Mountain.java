@@ -13,6 +13,6 @@ public class Mountain extends Point {
 
     @Override
     public String toString() {
-        return "M";
+        return "     M     ";
     }
 }

@@ -6,24 +6,24 @@ import java.util.List;
  * Game object
  */
 public class Game {
-    private Map map;
+    private GameMap gameMap;
     private List<Mountain> mountainList;
     private List<Treasure> treasureList;
     private List<Adventurer> adventurerList;
 
-    public Game(Map map, List<Mountain> mountainList, List<Treasure> treasureList, List<Adventurer> adventurerList) {
-        this.map = map;
+    public Game(GameMap gameMap, List<Mountain> mountainList, List<Treasure> treasureList, List<Adventurer> adventurerList) {
+        this.gameMap = gameMap;
         this.mountainList = mountainList;
         this.treasureList = treasureList;
         this.adventurerList = adventurerList;
     }
 
-    public Map getMap() {
-        return map;
+    public GameMap getGameMap() {
+        return gameMap;
     }
 
-    public void setMap(Map map) {
-        this.map = map;
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
     }
 
     public List<Mountain> getMountainList() {
@@ -49,4 +49,5 @@ public class Game {
     public void setAdventurerList(List<Adventurer> adventurerList) {
         this.adventurerList = adventurerList;
     }
+
 }
