@@ -5,6 +5,8 @@ import main.game.enums.Message;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,18 @@ public class FileUtils {
                 }
             }
             return returnList;
+        } catch (IOException e) {
+            throw new Exception(Message.FILE_LOADING_ERROR.toString());
+        } catch (NullPointerException e) {
+            throw new Exception(Message.FILE_NOT_FOUND.toString());
+        }
+    }
+
+    public static void writeGameOutputToFile(String string, String fileOutputName) throws Exception {
+        try {
+            PrintWriter writer = new PrintWriter(fileOutputName, StandardCharsets.UTF_8);
+            writer.print(string);
+            writer.close();
         } catch (IOException e) {
             throw new Exception(Message.FILE_LOADING_ERROR.toString());
         } catch (NullPointerException e) {

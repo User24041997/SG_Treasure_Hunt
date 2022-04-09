@@ -22,8 +22,12 @@ public class Treasure extends Point {
         this.count = count;
     }
 
+    public String toMapString() {
+        return "     T(" + count + ")  ";
+    }
+
     @Override
     public String toString() {
-        return "     T(" + count + ")  ";
+        return "T - " + x + " - " + y + " - " + count;
     }
 }

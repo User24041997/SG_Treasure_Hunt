@@ -45,8 +45,7 @@ public class GameMap {
         this.gameMap = gameMap;
     }
 
-    @Override
-    public String toString() {
+    public String toMapString() {
         String res = "";
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
@@ -56,8 +55,13 @@ public class GameMap {
                     res += "     -     ";
                 }
             }
-            res += "\n";
+            res += "\r\n";
         }
         return res;
+    }
+
+    @Override
+    public String toString() {
+        return "C - " + width + " - " + height;
     }
 }

@@ -78,22 +78,20 @@ public class GameImpl implements IGame {
 
         if (mountainList != null && !mountainList.isEmpty()) {
             for (Mountain mountain : mountainList) {
-                gameMap[(int)mountain.getY()][(int)mountain.getX()] = mountain.toString();
+                gameMap[(int)mountain.getY()][(int)mountain.getX()] = mountain.toMapString();
             }
         }
         if (treasureList != null && !treasureList.isEmpty()) {
             for (Treasure treasure : treasureList) {
-                gameMap[(int)treasure.getY()][(int)treasure.getX()] = treasure.toString();
+                gameMap[(int)treasure.getY()][(int)treasure.getX()] = treasure.toMapString();
             }
         }
         if (adventurerList != null && !adventurerList.isEmpty()) {
             for (Adventurer adventurer : adventurerList) {
-                gameMap[(int)adventurer.getY()][(int)adventurer.getX()] = adventurer.toString();
+                gameMap[(int)adventurer.getY()][(int)adventurer.getX()] = adventurer.toMapString();
             }
         }
         return gameMap;
     }
-
-
 
 }
