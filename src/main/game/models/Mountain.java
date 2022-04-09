@@ -11,8 +11,12 @@ public class Mountain extends Point {
         super(xPos, yPos);
     }
 
+    public String toMapString() {
+        return "     M     ";
+    }
+
     @Override
     public String toString() {
-        return "     M     ";
+        return "M - " + x + " - " + y;
     }
 }

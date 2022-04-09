@@ -9,8 +9,6 @@ import java.util.List;
 
 public class Main {
 
-    
-
     public static void main(String[] args) {
         try {
             IGame iGame = new GameImpl();
@@ -19,7 +17,12 @@ public class Main {
 
             Game game = iGame.extractGameObjectsFromGameData(gameData);
 
+            System.out.println(game.getGameMap().toMapString());
+            System.out.println(game);
+
             iGame.play(game);
+
+            FileUtils.writeGameOutputToFile(game.toString(), "game_output/game_output.txt");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
