@@ -21,9 +21,10 @@ public class FileUtils {
             streamLines.close();
             List<String[]> returnList = new ArrayList<>();
             for (String line : stringLines) {
-                String[] s = line.split(" - ");
-                returnList.add(s);
-
+                if (line.charAt(0) != '#') {
+                    String[] s = line.split(" - ");
+                    returnList.add(s);
+                }
             }
             return returnList;
         } catch (IOException e) {
