@@ -1,5 +1,6 @@
 package main.game.interfaces.implementation;
 
+import main.game.enums.GameCharacter;
 import main.game.enums.Message;
 import main.game.interfaces.IGame;
 import main.game.models.*;
@@ -83,25 +84,22 @@ public class GameImpl implements IGame {
         // TODO Check if other parameters are valid
         for (String[] objectData : gameData) {
             if (CheckUtils.isValidGameCharacter(objectData[0])) {
-                switch(objectData[0]) {
-                    case "A":
-                        Adventurer adventurer = new Adventurer(objectData[1], Integer.parseInt(objectData[2]), Integer.parseInt(objectData[3]), objectData[4], objectData[5]);
-                        adventurerList.add(adventurer);
-                        break;
-                    case "C":
-                        gameMap = new GameMap(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]));
-                        break;
-                    case "M":
-                        Mountain mountain = new Mountain(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]));
-                        mountainList.add(mountain);
-                        break;
-                    case "T":
-                        Treasure treasure = new Treasure(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]), Integer.parseInt(objectData[3]));
-                        treasureList.add(treasure);
-                        break;
-                    default:
-                        break;
-                }
+               if (objectData[0].equals(GameCharacter.ADVENTURER.toString())) {
+                   Adventurer adventurer = new Adventurer(objectData[1], Integer.parseInt(objectData[2]), Integer.parseInt(objectData[3]), objectData[4], objectData[5]);
+                   adventurerList.add(adventurer);
+                   continue;
+               } else if (objectData[0].equals(GameCharacter.GAME_MAP.toString())) {
+                   gameMap = new GameMap(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]));
+                   continue;
+               } else if (objectData[0].equals(GameCharacter.MOUNTAIN.toString())) {
+                   Mountain mountain = new Mountain(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]));
+                   mountainList.add(mountain);
+                   continue;
+               } else if (objectData[0].equals(GameCharacter.TREASURE.toString())) {
+                   Treasure treasure = new Treasure(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]), Integer.parseInt(objectData[3]));
+                   treasureList.add(treasure);
+                   continue;
+               }
             }
         }
 
