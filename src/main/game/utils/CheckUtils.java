@@ -1,6 +1,6 @@
 package main.game.utils;
 
-import main.game.enums.Message;
+import main.game.enums.GameCharacter;
 
 public class CheckUtils {
 
@@ -10,24 +10,9 @@ public class CheckUtils {
      * @return bool
      */
     public static Boolean isValidGameCharacter(String s) {
-        Boolean bool = false;
-        switch(s) {
-            case "A":
-                bool = true;
-                break;
-            case "C":
-                bool = true;
-                break;
-            case "M":
-                bool = true;
-                break;
-            case "T":
-                bool = true;
-                break;
-            default:
-                System.out.println(Message.INVALID_CHAR_INPUT);
-                break;
-        }
-        return bool;
+        return s.equals(GameCharacter.TREASURE.toString())
+                || s.equals(GameCharacter.ADVENTURER.toString())
+                || s.equals(GameCharacter.GAME_MAP.toString())
+                || s.equals(GameCharacter.MOUNTAIN.toString());
     }
 }

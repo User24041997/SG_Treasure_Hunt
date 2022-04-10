@@ -17,10 +17,20 @@ public class Main {
 
             Game game = iGame.extractGameObjectsFromGameData(gameData);
 
-            System.out.println(game.getGameMap().toMapString());
+            System.out.println("GAME STARTED");
+            System.out.println("============");
+            System.out.println(game.refreshGameMap2DArray());
             System.out.println(game);
+            System.out.println("============");
 
             iGame.play(game);
+
+            System.out.println("GAME RESULTS");
+            System.out.println("============");
+            System.out.println(game.refreshGameMap2DArray());
+            System.out.println(game);
+            System.out.println("============");
+
 
             FileUtils.writeGameOutputToFile(game.toString(), "game_output/game_output.txt");
 

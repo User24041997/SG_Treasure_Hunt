@@ -1,16 +1,17 @@
 package main.game.enums;
 
 /**
- * Possible movements for the adventurers
+ * Orientation of the adventurers
  */
-public enum Movement {
-    MOVE_FORWARD("A"),
-    MOVE_LEFT("G"),
-    MOVE_RIGHT("D");
+public enum Orientation {
+    NORTH("N"),
+    SOUTH("S"),
+    EAST("E"),
+    WEST("O");
 
     private final String value;
 
-    Movement(final String value) {
+    Orientation(final String value) {
         this.value = value;
     }
 

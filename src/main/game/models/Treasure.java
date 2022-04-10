@@ -22,6 +22,18 @@ public class Treasure extends Point {
         this.count = count;
     }
 
+    public void isCollected() {
+        count--;
+    }
+
+    public Boolean canBeCollected() {
+        return count > 0;
+    }
+
+    public Boolean isEmpty() {
+        return count == 0;
+    }
+
     public String toMapString() {
         return "     T(" + count + ")  ";
     }

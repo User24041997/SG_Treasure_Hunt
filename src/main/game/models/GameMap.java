@@ -1,5 +1,7 @@
 package main.game.models;
 
+import main.game.enums.GameCharacter;
+
 /**
  * Game map
  */
@@ -18,7 +20,7 @@ public class GameMap {
     public GameMap(Integer width, Integer height) {
         this.width = width;
         this.height = height;
-        gameMap = new String[height][width];
+        gameMap = new String[width][height];
     }
 
     public Integer getWidth() {
@@ -37,7 +39,7 @@ public class GameMap {
         this.height = height;
     }
 
-    public String[][] getGameMap() {
+    public String[][] getGameMap2DArray() {
         return gameMap;
     }
 
@@ -45,12 +47,22 @@ public class GameMap {
         this.gameMap = gameMap;
     }
 
+    public Boolean positionIsNotAnObstacle(Integer xPos, Integer yPos) {
+        return gameMap[xPos][yPos] == null ||
+                (!gameMap[xPos][yPos].trim().equals(GameCharacter.MOUNTAIN.toString())
+                        && !String.valueOf(gameMap[xPos][yPos].trim().charAt(0)).equals(GameCharacter.ADVENTURER.toString()));
+    }
+
+    public Boolean positionIsATreasure(Integer xPos, Integer yPos) {
+        return gameMap[xPos][yPos] != null && !gameMap[xPos][yPos].trim().equals(GameCharacter.TREASURE.toString());
+    }
+
     public String toMapString() {
         String res = "";
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
-                if (this.gameMap[i][j] != null) {
-                    res += this.gameMap[i][j];
+                if (this.gameMap[j][i] != null) {
+                    res += this.gameMap[j][i];
                 } else {
                     res += "     -     ";
                 }
