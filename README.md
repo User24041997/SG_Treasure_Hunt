@@ -4,9 +4,9 @@ Simple game simulation based on predefined movements, treasure collection and di
 
 ## Features :
 
-* Read an input file
-* Simulate adventurers movements
-* Write an output file
+* Read an input file with game information
+* Simulate multiple adventurers movements in a 2D game
+* Write an output file with game information after being played
 
 ## Game Objects :
 
@@ -19,6 +19,8 @@ Simple game simulation based on predefined movements, treasure collection and di
 
 
 ## Game Example :
+
+<em>Please, edit the game.txt file in the resources folder to simulate a game</em>
 
 File Input :
 ```sh
