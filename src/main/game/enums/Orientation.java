@@ -1,14 +1,17 @@
 package main.game.enums;
 
-public enum GameCharacter {
-    ADVENTURER("A"),
-    MAP("C"),
-    MOUNTAIN("M"),
-    TREASURE("T");
+/**
+ * Orientation of the adventurers
+ */
+public enum Orientation {
+    NORTH("N"),
+    SOUTH("S"),
+    EAST("E"),
+    WEST("O");
 
     private final String value;
 
-    GameCharacter(final String value) {
+    Orientation(final String value) {
         this.value = value;
     }
 

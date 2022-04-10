@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -35,7 +36,7 @@ public class MainTest {
 
     @Test
     public void testExtractGameObjectsFromGameData() throws Exception {
-        Game gameMock = this.createGameMock();
+        Game gameMock = this.createGameUtilsMock();
 
         IGame iGame = new GameImpl();
 
@@ -53,7 +54,7 @@ public class MainTest {
 
     @Test
     public void testWriteGameOutputToFile() throws Exception {
-        Game gameMock = this.createGameMock();
+        Game gameMock = this.createGameUtilsMock();
 
         FileUtils.writeGameOutputToFile(gameMock.toString(), "test/output/game_mock_output.txt");
 
@@ -68,7 +69,47 @@ public class MainTest {
 
     }
 
-    private Game createGameMock() {
+    @Test
+    public void testOnePlayerGamePlay() throws Exception {
+        Game gameMock = this.createOnePlayerGameMock();
+
+        IGame iGame = new GameImpl();
+
+        iGame.play(gameMock);
+
+        FileUtils.writeGameOutputToFile(gameMock.toString(), "test/output/game_mock_output.txt");
+
+        byte[] file1Bytes = Files.readAllBytes(Paths.get("test/output/game_mock_output.txt"));
+        byte[] file2Bytes = Files.readAllBytes(Paths.get("test/output/one_player_game_output_to_compare.txt"));
+
+        String file1 = new String(file1Bytes, StandardCharsets.UTF_8);
+        String file2 = new String(file2Bytes, StandardCharsets.UTF_8);
+
+        assertEquals(file1.trim(), file2.trim());
+
+    }
+
+    @Test
+    public void testOnePlayerNotAbleToMoveGamePlay() throws Exception {
+        Game gameMock = this.createOnePlayerNotAbleToMoveGamePlay();
+
+        IGame iGame = new GameImpl();
+
+        iGame.play(gameMock);
+
+        FileUtils.writeGameOutputToFile(gameMock.toString(), "test/output/game_mock_output.txt");
+
+        byte[] file1Bytes = Files.readAllBytes(Paths.get("test/output/game_mock_output.txt"));
+        byte[] file2Bytes = Files.readAllBytes(Paths.get("test/output/one_player_not_able_to_move_game_output_to_compare.txt"));
+
+        String file1 = new String(file1Bytes, StandardCharsets.UTF_8);
+        String file2 = new String(file2Bytes, StandardCharsets.UTF_8);
+
+        assertEquals(file1.trim(), file2.trim());
+
+    }
+
+    private Game createGameUtilsMock() {
         String[][] gameMapArrayMock = new String[][] {
                 {"-", "M", "-"},
                 {"-", "A(Lara)", "M"},
@@ -89,6 +130,73 @@ public class MainTest {
         treasureListMock.add(new Treasure(0, 3, 2));
         treasureListMock.add(new Treasure(1, 3, 2));
 
-       return new Game(gameMapMock, mountainListMock, treasureListMock, adventurerListMock);
+        Integer turnNumber = 0;
+        if (!adventurerListMock.isEmpty()) {
+            turnNumber = adventurerListMock.stream()
+                    .max(Comparator.comparingInt(Adventurer::getNumberOfMovements))
+                    .get().getNumberOfMovements();
+        }
+
+       return new Game(gameMapMock, mountainListMock, treasureListMock, adventurerListMock, turnNumber);
+    }
+
+    private Game createOnePlayerGameMock() {
+        String[][] gameMapArrayMock = new String[][] {
+                {"-", "M", "-"},
+                {"-", "A(Lara)", "M"},
+                {"-", "-", "-"},
+                {"-", "-", "-"},
+                {"T(2)", "T(3)", "-"}
+        };
+
+        GameMap gameMapMock = new GameMap(3, 4);
+        gameMapMock.setGameMap(gameMapArrayMock);
+        List<Adventurer> adventurerListMock = new ArrayList<>();
+        adventurerListMock.add(new Adventurer("Lara", 1, 1, "S", "AADADAGGA"));
+        List<Mountain> mountainListMock = new ArrayList<>();
+        mountainListMock.add(new Mountain(1, 0));
+        mountainListMock.add(new Mountain(2, 1));
+        List<Treasure> treasureListMock = new ArrayList<>();
+        treasureListMock.add(new Treasure(0, 3, 2));
+        treasureListMock.add(new Treasure(1, 3, 3));
+
+        Integer turnNumber = 0;
+        if (!adventurerListMock.isEmpty()) {
+            turnNumber = adventurerListMock.stream()
+                    .max(Comparator.comparingInt(Adventurer::getNumberOfMovements))
+                    .get().getNumberOfMovements();
+        }
+
+        return new Game(gameMapMock, mountainListMock, treasureListMock, adventurerListMock, turnNumber);
+    }
+
+    private Game createOnePlayerNotAbleToMoveGamePlay() {
+        String[][] gameMapArrayMock = new String[][] {
+                {"-", "M", "-"},
+                {"-", "A(Lara)", "M"},
+                {"-", "-", "-"},
+                {"-", "-", "-"},
+                {"T(2)", "T(3)", "-"}
+        };
+
+        GameMap gameMapMock = new GameMap(3, 4);
+        gameMapMock.setGameMap(gameMapArrayMock);
+        List<Adventurer> adventurerListMock = new ArrayList<>();
+        adventurerListMock.add(new Adventurer("Lara", 1, 1, "S", "AAADAAA"));
+        List<Mountain> mountainListMock = new ArrayList<>();
+        mountainListMock.add(new Mountain(1, 0));
+        mountainListMock.add(new Mountain(2, 1));
+        List<Treasure> treasureListMock = new ArrayList<>();
+        treasureListMock.add(new Treasure(0, 3, 2));
+        treasureListMock.add(new Treasure(1, 3, 3));
+
+        Integer turnNumber = 0;
+        if (!adventurerListMock.isEmpty()) {
+            turnNumber = adventurerListMock.stream()
+                    .max(Comparator.comparingInt(Adventurer::getNumberOfMovements))
+                    .get().getNumberOfMovements();
+        }
+
+        return new Game(gameMapMock, mountainListMock, treasureListMock, adventurerListMock, turnNumber);
     }
 }
