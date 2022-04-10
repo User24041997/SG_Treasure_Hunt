@@ -49,7 +49,8 @@ public class GameMap {
 
     public Boolean positionIsNotAnObstacle(Integer xPos, Integer yPos) {
         return gameMap[xPos][yPos] == null ||
-                (!gameMap[xPos][yPos].trim().equals(GameCharacter.MOUNTAIN.toString()) && !gameMap[xPos][yPos].trim().equals(GameCharacter.ADVENTURER.toString()));
+                (!gameMap[xPos][yPos].trim().equals(GameCharacter.MOUNTAIN.toString())
+                        && !String.valueOf(gameMap[xPos][yPos].trim().charAt(0)).equals(GameCharacter.ADVENTURER.toString()));
     }
 
     public Boolean positionIsATreasure(Integer xPos, Integer yPos) {

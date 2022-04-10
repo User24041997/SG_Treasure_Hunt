@@ -65,6 +65,10 @@ public class Adventurer extends Point {
         return movements.length();
     }
 
+    public Boolean hasMovements() {
+        return movements != null && !movements.isEmpty();
+    }
+
     public Boolean canMoveDown(Integer downLimit) {
         return y + 1 < downLimit;
     }

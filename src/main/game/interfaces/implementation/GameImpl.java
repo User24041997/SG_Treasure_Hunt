@@ -28,9 +28,13 @@ public class GameImpl implements IGame {
         GameMap gameMap = game.getGameMap();
 
         for (int i = 0; i < game.getTurnNumber(); i++) {
+            System.out.println("TURN : " + i);
             for (Adventurer adventurer : game.getAdventurerList()) {
                 // IF adventurer still has movements
-                if (i < adventurer.getNumberOfMovements()) {
+                if (adventurer.hasMovements() && i < adventurer.getNumberOfMovements()) {
+                    System.out.println("Movements " + adventurer.getName() + " : " + adventurer.getOrientation() + adventurer.getMovements().charAt(i));
+                    System.out.println(game.refreshGameMap2DArray());
+                    game.refreshGameMap2DArray();
                     // IF adventurer is still inside axis y
                     if (adventurer.isInsideMapHeightBorders(game.getGameMap().getHeight() - 1)) {
                         // GOING DOWN CONDITIONS
@@ -81,36 +85,30 @@ public class GameImpl implements IGame {
         List<Mountain> mountainList = new ArrayList<>();
         List<Treasure> treasureList = new ArrayList<>();
 
-        // TODO Check if other parameters are valid
         for (String[] objectData : gameData) {
             if (CheckUtils.isValidGameCharacter(objectData[0])) {
-               if (objectData[0].equals(GameCharacter.ADVENTURER.toString())) {
-                   Adventurer adventurer = new Adventurer(objectData[1], Integer.parseInt(objectData[2]), Integer.parseInt(objectData[3]), objectData[4], objectData[5]);
-                   adventurerList.add(adventurer);
-                   continue;
-               } else if (objectData[0].equals(GameCharacter.GAME_MAP.toString())) {
+               if (objectData[0].equals(GameCharacter.GAME_MAP.toString()) && objectData.length == GameCharacter.GAME_MAP.getNumberOfElements()) {
                    gameMap = new GameMap(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]));
-                   continue;
-               } else if (objectData[0].equals(GameCharacter.MOUNTAIN.toString())) {
+               } else if (objectData[0].equals(GameCharacter.MOUNTAIN.toString()) && objectData.length == GameCharacter.MOUNTAIN.getNumberOfElements()) {
                    Mountain mountain = new Mountain(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]));
                    mountainList.add(mountain);
-                   continue;
-               } else if (objectData[0].equals(GameCharacter.TREASURE.toString())) {
+               } else if (objectData[0].equals(GameCharacter.TREASURE.toString()) && objectData.length == GameCharacter.TREASURE.getNumberOfElements()) {
                    Treasure treasure = new Treasure(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]), Integer.parseInt(objectData[3]));
                    treasureList.add(treasure);
-                   continue;
+               } else if (objectData[0].equals(GameCharacter.ADVENTURER.toString()) && objectData.length == GameCharacter.ADVENTURER.getNumberOfElements()) {
+                   Adventurer adventurer = new Adventurer(objectData[1], Integer.parseInt(objectData[2]), Integer.parseInt(objectData[3]), objectData[4], objectData[5]);
+                   adventurerList.add(adventurer);
                }
             }
         }
 
+        // Initialize the turn numbers of the game
         Integer turnNumber = 0;
         if (!adventurerList.isEmpty()) {
             turnNumber = adventurerList.stream()
                     .max(Comparator.comparingInt(Adventurer::getNumberOfMovements))
                     .get().getNumberOfMovements();
         }
-
-
 
         if (gameMap.getGameMap2DArray() == null) {
             System.out.println(Message.GAME_MAP_NOT_INSTANCED);

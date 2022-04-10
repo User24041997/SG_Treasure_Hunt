@@ -18,7 +18,7 @@ public class Game {
         this.treasureList = treasureList;
         this.adventurerList = adventurerList;
         this.turnNumber = turnNumber;
-        this.initializeGameMap2DArray();
+        this.refreshGameMap2DArray();
     }
 
     public GameMap getGameMap() {
@@ -74,7 +74,7 @@ public class Game {
         }
     }
 
-    public String initializeGameMap2DArray() {
+    public String refreshGameMap2DArray() {
         String[][] map = new String[gameMap.getWidth()][gameMap.getHeight()];
 
         if (mountainList != null && !mountainList.isEmpty()) {
