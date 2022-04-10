@@ -1,5 +1,8 @@
 package main.game.enums;
 
+/**
+ * Possible game characters read from file input
+ */
 public enum GameCharacter {
     ADVENTURER("A"),
     MOUNTAIN("M"),
