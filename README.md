@@ -29,12 +29,13 @@ M - 1 - 0
 M - 2 - 1
 T - 0 - 3 - 2
 T - 1 - 3 - 3
-A - Andy - 1 - 1 - S - AADADAGGA
+A - Lara - 1 - 1 - S - AADADAGGA
+A - Andy - 0 - 2 - S - AGAAAA
 ```
 ```sh
 .       M         .
-.       A(Andy)   M
-.       .         .
+.       A(Lara)   M
+A(Andy) .         .
 T(2)    T(3)      .
 ```
 
@@ -43,14 +44,15 @@ File Output :
 C - 3 - 4
 M - 1 - 0
 M - 2 - 1
-T - 1 - 3 - 2
-A - Andy - 0 - 3 - S – 3
+T - 1 - 3 - 1
+A - Lara - 0 - 3 - S - 2
+A - Andy - 2 - 3 - E - 2
 ```
 ```sh
 .         M         .
 .         .         M
 .         .         .
-A(Andy)   T(2)      .
+A(Lara)   T(1)    A(Andy)
 ```
 
 
