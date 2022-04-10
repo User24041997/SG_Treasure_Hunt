@@ -15,6 +15,12 @@ import java.util.stream.Stream;
 
 public class FileUtils {
 
+    /**
+     * Get the list of game data objects from an input file
+     * @param fileName
+     * @return returnList
+     * @throws Exception
+     */
     public static List<String[]> getListStringFromFile(String fileName) throws Exception {
         try {
             File file = new File(Main.class.getClassLoader().getResource(fileName).getFile());
@@ -36,6 +42,12 @@ public class FileUtils {
         }
     }
 
+    /**
+     * Write the game played information to an output file
+     * @param string
+     * @param fileOutputName
+     * @throws Exception
+     */
     public static void writeGameOutputToFile(String string, String fileOutputName) throws Exception {
         try {
             PrintWriter writer = new PrintWriter(fileOutputName, StandardCharsets.UTF_8);

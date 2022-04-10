@@ -2,6 +2,8 @@ package main.game.enums;
 
 /**
  * Possible game characters read from file input
+ * First value is the character expected
+ * Second value is the number of elements expected
  */
 public enum GameCharacter {
     ADVENTURER("A", 6),
