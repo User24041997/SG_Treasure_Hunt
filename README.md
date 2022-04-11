@@ -55,7 +55,7 @@ A - Andy - 2 - 3 - E - 2
 A(Lara)   T(1)    A(Andy)
 ```
 
-<em>The game output text file is in the output/ folder</em>
+<em>The game output text file is in the game_output/ folder</em>
 
 ## Built with :
 
